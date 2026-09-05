@@ -5,4 +5,5 @@
 
     void CheckOut();
     void Return();
+    void Describe();
 }

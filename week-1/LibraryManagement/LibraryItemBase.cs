@@ -14,6 +14,8 @@
             }
 
         }
+        //protected setter allows derived classes to change availability,
+        //while preventing outside code from changing it directly.
         public bool IsAvailable { get; protected set; } = true;
         public void CheckOut()
         {
