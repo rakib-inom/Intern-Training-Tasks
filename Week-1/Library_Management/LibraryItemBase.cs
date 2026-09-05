@@ -3,30 +3,30 @@ public abstract class LibraryItemBase : ILibraryItem
 {
     public string Title { get; set; }
 
-    public bool isAvailable { get; protected set; }
+    public bool IsAvailable { get; protected set; }
 
-    protected string itemType;
+    protected string ItemType;
 
     public LibraryItemBase(string title)
     {
         Title = title;
-        isAvailable = true;
+        IsAvailable = true;
     }
 
-    public void checkOut()
+    public void CheckOut()
     {
-        isAvailable = false;
+        IsAvailable = false;
 
-        console.WriteLine(Title + " has been checked out.");
+        Console.WriteLine(Title + " has been checked out.");
     }
 
     public void Return()
     {
-        isAvailable = true;
+        IsAvailable = true;
 
-        console.WriteLine(Title + " has been returned.");
+        Console.WriteLine(Title + " has been returned.");
     }
 
-    public abstract void describe();
+    public abstract void Describe();
 
 }

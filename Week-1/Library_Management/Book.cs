@@ -6,15 +6,15 @@ public class Book : LibraryItemBase
     {
         Author = author;
 
-        itemType = "Book";
+        ItemType = "Book";
     }
 
-    public override void describe()
+    public override void Describe()
     {
         console.WriteLine("Book");
         console.WriteLine("Title: " + Title);
         console.WriteLine("Author: " + Author);
-        console.WriteLine("Available: " + isAvailable);
+        console.WriteLine("Available: " + IsAvailable);
         console.WriteLine();
     }
 }

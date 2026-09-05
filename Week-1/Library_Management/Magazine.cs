@@ -1,19 +1,19 @@
-public class magazine : LibraryItemBase
+public class Magazine : LibraryItemBase
 {
     public int IssueNumber { get; set; }
 
-    public magazine(string title, int issueNumber) : base(title)
+    public Magazine(string title, int issueNumber) : base(title)
     {
         IssueNumber = issueNumber;
-        itemType = "Magazine";
+        ItemType = "Magazine";
     }
 
-    public override void describe()
+    public override void Describe()
     {
         console.WriteLine("Magazine");
         console.WriteLine("Title: " + Title);
         console.WriteLine("Issue Number: " + IssueNumber);
-        console.WriteLine("Available: " + isAvailable);
+        console.WriteLine("Available: " + IsAvailable);
         console.WriteLine();
     }
 }

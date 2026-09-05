@@ -2,7 +2,7 @@
 public struct LibraryBranchInfo
 {
     public string BranchCode;
-    public string location;
+    public string Location;
 
     public LibraryBranchInfo(string branchCode, string location)
     {
