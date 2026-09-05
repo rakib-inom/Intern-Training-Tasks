@@ -32,5 +32,34 @@ namespace LibraryManagement
             Title = title;
             _isAvailable = true;
         }
+
+        public void CheckOut()
+        {
+            if (!_isAvailable)
+            {
+                Console.WriteLine($"The item '{Title}' is already checked out.");
+                return;
+            }
+            _isAvailable = false;
+            Console.WriteLine($"The item '{Title}' has been checked out.");
+        }
+
+        public void Return()
+        {
+            if (_isAvailable)
+            {
+                Console.WriteLine($"The item '{Title}' is already available.");
+                return;
+            }
+            _isAvailable = true;
+            Console.WriteLine($"The item '{Title}' has been returned.");
+        }
+
+        protected string GetItemType()
+        {
+            return GetType().Name;
+        }
+
+        public abstract void Describe();
     }
 }
