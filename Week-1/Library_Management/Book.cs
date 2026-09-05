@@ -11,10 +11,12 @@ public class Book : LibraryItemBase
 
     public override void Describe()
     {
-        console.WriteLine("Book");
-        console.WriteLine("Title: " + Title);
-        console.WriteLine("Author: " + Author);
-        console.WriteLine("Available: " + IsAvailable);
-        console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine("BOOK~~ ");
+        Console.WriteLine();
+        Console.WriteLine("Title: " + Title);
+        Console.WriteLine("Author: " + Author);
+        Console.WriteLine("Available: " + IsAvailable);
+        Console.WriteLine();
     }
 }

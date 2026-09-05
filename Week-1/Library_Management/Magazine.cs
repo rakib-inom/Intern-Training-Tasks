@@ -10,10 +10,12 @@ public class Magazine : LibraryItemBase
 
     public override void Describe()
     {
-        console.WriteLine("Magazine");
-        console.WriteLine("Title: " + Title);
-        console.WriteLine("Issue Number: " + IssueNumber);
-        console.WriteLine("Available: " + IsAvailable);
-        console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine("MAGAZINE~~ ");
+        Console.WriteLine();
+        Console.WriteLine("Title: " + Title);
+        Console.WriteLine("Issue Number: " + IssueNumber);
+        Console.WriteLine("Available: " + IsAvailable);
+        Console.WriteLine();
     }
 }

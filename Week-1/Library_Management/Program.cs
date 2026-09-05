@@ -19,16 +19,17 @@ class Program
         ILibraryItem item1 = book;
         ILibraryItem item2 = magazine1;
 
-        item1.describe();
-        item2.describe();
+        item1.Describe();
+        item2.Describe();
 
 
         // check out
 
         Console.WriteLine();
-        Console.WriteLine("Check out the book");
+        Console.WriteLine("CHECK OUT~~ ");
+        Console.WriteLine();
 
-        book.checkOut();
+        book.CheckOut();
 
         Console.WriteLine("Available: " + book.IsAvailable);
         Console.WriteLine();
@@ -36,7 +37,9 @@ class Program
 
         // return
 
-        Console.WriteLine("Return");
+        Console.WriteLine();
+        Console.WriteLine("RETURN~~ ");
+        Console.WriteLine();
         book.Return();
 
         Console.WriteLine("Available: " + book.IsAvailable);
@@ -45,7 +48,9 @@ class Program
 
         // value type
 
-        Console.WriteLine("Value Type");
+        Console.WriteLine();
+        Console.WriteLine("VALUE TYPE~~ ");
+        Console.WriteLine();
 
         LibraryBranchInfo branch1 = new LibraryBranchInfo("Downtown Branch", "123 Main St");
 
@@ -54,30 +59,25 @@ class Program
         branch2.BranchCode = "456 Elm St";
         branch2.Location = "Uptown Branch";
 
-        Console.WriteLine("Original Branch:");
-        Console.WriteLine(branch1.BranchCode);
-        Console.WriteLine(branch1.Location);
-
+        Console.WriteLine("Original Branch:" + branch1.BranchCode + ", " + branch1.Location);
         Console.WriteLine();
 
-        Console.WriteLine("Copied Branch: ");
-        Console.WriteLine(branch2.BranchCode);
-        Console.WriteLine(branch2.Location);
-
+        Console.WriteLine("Copied Branch: " + branch2.BranchCode + ", " + branch2.Location);
         Console.WriteLine();
 
 
         // reference type
 
-        Console.WriteLine("Reference Type");
+        Console.WriteLine();
+        Console.WriteLine("REFERENCE TYPE~~ ");
+        Console.WriteLine();
 
         Book book1 = new Book("Java Programming", "George Orwell");
         Book book2 = book1;
 
         Console.WriteLine("Before change: ");
         Console.WriteLine("Book 1: " + book1.Title);
-        Console.WriteLine("Book 2: " + book2.Title);
-        Console.WriteLine(); 
+        Console.WriteLine("Book 2: " + book2.Title); 
         
         book2.Title = "Animal Farm";
         Console.WriteLine();
