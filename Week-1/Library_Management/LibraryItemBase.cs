@@ -1,3 +1,4 @@
+
 public abstract class LibraryItemBase : ILibraryItem
 {
     public string Title { get; set; }
