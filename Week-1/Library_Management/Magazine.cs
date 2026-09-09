@@ -11,7 +11,7 @@ public class Magazine : LibraryItemBase
     public override void Describe()
     {
         Console.WriteLine();
-        Console.WriteLine("MAGAZINE~~ ");
+        Console.WriteLine("MAGAZINE ");
         Console.WriteLine();
         Console.WriteLine("Title: " + Title);
         Console.WriteLine("Issue Number: " + IssueNumber);

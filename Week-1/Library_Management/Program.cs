@@ -10,8 +10,8 @@ class Program
 
         // create objects
 
-        Book book = new Book("The Great Gatsby", "F. Scott Fitzgerald");
-        Magazine magazine1 = new Magazine("National Geographic", 202);
+        Book book = new Book("C# Programming", "John");
+        Magazine magazine1 = new Magazine("Tech World", 202);
         
 
         // polymorphism
@@ -26,7 +26,7 @@ class Program
         // check out
 
         Console.WriteLine();
-        Console.WriteLine("CHECK OUT~~ ");
+        Console.WriteLine("CHECK OUT ");
         Console.WriteLine();
 
         book.CheckOut();
@@ -38,7 +38,7 @@ class Program
         // return
 
         Console.WriteLine();
-        Console.WriteLine("RETURN~~ ");
+        Console.WriteLine("RETURN ");
         Console.WriteLine();
         book.Return();
 
@@ -49,15 +49,15 @@ class Program
         // value type
 
         Console.WriteLine();
-        Console.WriteLine("VALUE TYPE~~ ");
+        Console.WriteLine("VALUE TYPE ");
         Console.WriteLine();
 
         LibraryBranchInfo branch1 = new LibraryBranchInfo("Downtown Branch", "123 Main St");
 
         LibraryBranchInfo branch2 = branch1;
 
-        branch2.BranchCode = "456 Elm St";
-        branch2.Location = "Uptown Branch";
+        branch2.BranchCode = "B02";
+        branch2.Location = "Savar";
 
         Console.WriteLine("Original Branch:" + branch1.BranchCode + ", " + branch1.Location);
         Console.WriteLine();
@@ -69,17 +69,17 @@ class Program
         // reference type
 
         Console.WriteLine();
-        Console.WriteLine("REFERENCE TYPE~~ ");
+        Console.WriteLine("REFERENCE TYPE ");
         Console.WriteLine();
 
-        Book book1 = new Book("Java Programming", "George Orwell");
+        Book book1 = new Book("Java Programming", "George");
         Book book2 = book1;
 
         Console.WriteLine("Before change: ");
         Console.WriteLine("Book 1: " + book1.Title);
         Console.WriteLine("Book 2: " + book2.Title); 
         
-        book2.Title = "Animal Farm";
+        book2.Title = "Python Programming";
         Console.WriteLine();
 
         Console.WriteLine("After change: ");

@@ -12,7 +12,7 @@ public class Book : LibraryItemBase
     public override void Describe()
     {
         Console.WriteLine();
-        Console.WriteLine("BOOK~~ ");
+        Console.WriteLine("BOOK ");
         Console.WriteLine();
         Console.WriteLine("Title: " + Title);
         Console.WriteLine("Author: " + Author);

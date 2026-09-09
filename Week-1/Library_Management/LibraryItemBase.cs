@@ -1,4 +1,5 @@
 
+
 public abstract class LibraryItemBase : ILibraryItem
 {
     public string Title { get; set; }
@@ -15,18 +16,23 @@ public abstract class LibraryItemBase : ILibraryItem
 
     public void CheckOut()
     {
+  
         IsAvailable = false;
 
-        Console.WriteLine(Title + " has been checked out.");
+        Console.WriteLine(Title + " is checked out.");
     }
 
     public void Return()
     {
         IsAvailable = true;
 
-        Console.WriteLine(Title + " has been returned.");
+        Console.WriteLine(Title + " is returned.");
     }
 
     public abstract void Describe();
 
 }
+
+
+
+
