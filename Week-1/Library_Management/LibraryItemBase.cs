@@ -5,7 +5,7 @@ public abstract class LibraryItemBase : ILibraryItem
 
     public bool IsAvailable { get; protected set; }
 
-    protected string ItemType( get; set; );
+    protected string ItemType { get; set; }
 
     public LibraryItemBase(string title)
     {
@@ -25,7 +25,7 @@ public abstract class LibraryItemBase : ILibraryItem
         }
         else
         {
-            Console.WriteLine(Title + " is already checked out.")
+            Console.WriteLine(Title + " is already checked out.");
         }
     }
 
