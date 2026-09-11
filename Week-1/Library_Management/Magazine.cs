@@ -1,3 +1,4 @@
+
 public class Magazine : LibraryItemBase
 {
     public int IssueNumber { get; set; }
