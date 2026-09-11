@@ -39,6 +39,7 @@ class Program
         finally
         {
             Console.WriteLine("operation attempted");
+            Console.WriteLine();
         }
 
 
@@ -69,6 +70,8 @@ class Program
         finally
         {
             Console.WriteLine("operation attempted");
+            Console.WriteLine();
+
         }
 
 
@@ -79,9 +82,9 @@ class Program
             Book book3 = new Book(
 
                  "B3",
-                 "C basics",
-                 "Tim",
-                 "Programming"
+                 "Kobor",
+                 "Jashim Uddin",
+                 "Poem"
 
              );
 
@@ -99,16 +102,16 @@ class Program
         finally
         {
             Console.WriteLine("operation attempted");
+            Console.WriteLine();
         }
 
 
         // list of all books
 
         Console.WriteLine();
-        Console.WriteLine(" ALL BOOKS ");
-        Console.WriteLine();
+        Console.WriteLine(" ALL BOOKS- ");
 
-        foreach(Book book in bookRepo.GetAll())
+        foreach(Book book in bookRepo.getAll())
         {
             book.Describe();
         }
@@ -136,6 +139,7 @@ class Program
         finally
         {
             Console.WriteLine("Opreation attempted");
+            Console.WriteLine();
         }
 
 
@@ -161,6 +165,7 @@ class Program
         finally
         {
             Console.WriteLine("Opreation attempted");
+            Console.WriteLine();
         }
 
 
@@ -186,7 +191,7 @@ class Program
         {
             Book dupbook = new Book(
 
-                 "B2",
+                 "B1",
                  "Shesher Kobita",
                  "Tagore",
                  "Novel"
@@ -204,6 +209,7 @@ class Program
         finally
         {
             Console.WriteLine("operation attempted");
+            Console.WriteLine();
         }
 
 
@@ -229,6 +235,10 @@ class Program
         {
             Console.WriteLine("Opreation attempted");
         }
+
+        Console.WriteLine();
+        Console.ReadLine();
+
 
         // create objects
 
@@ -308,7 +318,7 @@ class Program
         //Console.WriteLine("Book 1: " + book1.Title);
         //Console.WriteLine("Book 2: " + book2.Title);
 
-        //Console.ReadLine();
+
 
     }
 }

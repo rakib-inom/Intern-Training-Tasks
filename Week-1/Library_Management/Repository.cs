@@ -1,6 +1,7 @@
 public class Repository<T> where T: IIdentifiable
 {
     private List<T> items = new List<T>();
+
     private Dictionary<string, T> itemsById = new Dictionary<string, T>();
     
     public void Add(T item)
