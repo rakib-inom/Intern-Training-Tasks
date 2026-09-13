@@ -28,7 +28,7 @@ namespace LibraryManagement
             Author = author;
             Category = category;
 
-            ItemType = "Book";
+            
         }
 
         public override void Describe()
