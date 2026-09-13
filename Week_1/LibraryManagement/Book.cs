@@ -2,31 +2,38 @@
 
 namespace LibraryManagement
 {
-    public class Book : LibraryItemBase
+    public class Book : LibraryItemBase, IIdentifiable
     {
-        private string _author;
+        public string Id { get; }
+        public string Author { get; set; }
+        public string Category { get; set; }
+       
 
-        public string Author
+        public Book(string id, string title, string author, string category) : base(title)
         {
-            get { return _author; }
-            set
+            if(string.IsNullOrWhiteSpace(id))
             {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException("Author cannot be null or empty.");
-                }
-                _author = value;
+                throw new ArgumentException("Id cannot be null or empty.");
             }
-        }
+            if (string.IsNullOrWhiteSpace(author))
+            {
+                throw new ArgumentException("Author cannot be null or empty.");
+            }
+            if (string.IsNullOrWhiteSpace(category))
+            {
+                throw new ArgumentException("Category cannot be null or empty.");
+            }
 
-        public Book(string title, string author) : base(title)
-        {
+            Id = id;
             Author = author;
+            Category = category;
+
+            ItemType = "Book";
         }
 
         public override void Describe()
         {
-            Console.WriteLine($"Book: {Title} by {Author}");
+            Console.WriteLine($"Book | ID: {Id} | Title: {Title} | Author: {Author} | Category: {Category} | Available: {IsAvailable}");
         }
     }
 }
