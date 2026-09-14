@@ -1,7 +1,7 @@
 
 public interface ILibraryItem
 {
-    string Title { get; set; }
+    string Title { get; }
     bool IsAvailable { get;}
 
     void CheckOut();

@@ -1,11 +1,11 @@
 
 public abstract class LibraryItemBase : ILibraryItem
 {
-    public string Title { get; set; }
+    public string Title { get; private set; }
 
     public bool IsAvailable { get; protected set; }
 
-    protected string ItemType;
+    protected string ItemType { get; set; }
 
     public LibraryItemBase(string title)
     {
