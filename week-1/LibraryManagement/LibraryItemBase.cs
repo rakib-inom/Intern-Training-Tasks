@@ -1,7 +1,11 @@
-﻿namespace LibraryManagement
+﻿using System;
+
+namespace LibraryManagement
 {
     public abstract class LibraryItemBase : ILibraryItem
     {
+        public string Id { get; }
+
         private string _title;
         public string Title
         {
@@ -12,29 +16,33 @@
                     throw new ArgumentException("Title cannot be empty.");
                 _title = value;
             }
-
         }
-        //protected setter allows derived classes to change availability,
-        //while preventing outside code from changing it directly.
+
         public bool IsAvailable { get; protected set; } = true;
+
+        protected LibraryItemBase(string id, string title)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+                throw new ArgumentException("Id cannot be empty.");
+
+            Id = id;
+            Title = title;
+        }
+
         public void CheckOut()
         {
             if (!IsAvailable)
-                throw new InvalidOperationException(" Item is already checked out.");
+                throw new InvalidOperationException("Item is already checked out.");
             IsAvailable = false;
         }
+
         public void Return()
         {
             if (IsAvailable)
                 throw new InvalidOperationException("Item is already available.");
             IsAvailable = true;
         }
-        protected LibraryItemBase(string title)
-        {
-            Title= title;
-        }
+
         public abstract void Describe();
-
     }
-
 }

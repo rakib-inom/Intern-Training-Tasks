@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LibraryManagement
 {
@@ -6,45 +7,93 @@ namespace LibraryManagement
     {
         static void Main(string[] args)
         {
-            ILibraryItem book = new Book("Clean Code", "Robert C. Martin");
-            ILibraryItem magazine = new Magazine("Tech Monthly", 25);
+            // 1. Generic Repository Initialization
+            Repository<Book> bookRepo = new Repository<Book>();
+            Repository<Magazine> magazineRepo = new Repository<Magazine>();
 
-            book.Describe();
-            magazine.Describe();
+            // 2. HashSet for tracking unique categories
+            HashSet<string> categories = new HashSet<string>();
 
-            Console.WriteLine($"Book Available: {book.IsAvailable}");
+            Console.WriteLine("=== 1. Adding Books (Collections & Generics) ===");
 
-            book.CheckOut();
+            AddBookWithHandling(bookRepo, categories, new Book("B001", "Clean Code", "Robert C. Martin", "Programming"));
+            AddBookWithHandling(bookRepo, categories, new Book("B002", "Design Patterns", "Gang of Four", "Programming")); // Duplicate category "Programming"
+            AddBookWithHandling(bookRepo, categories, new Book("B003", "Dune", "Frank Herbert", "Sci-Fi"));
 
-            Console.WriteLine($"Book Available after checkout: {book.IsAvailable}");
+            // 3. Optional Magazine Repository Demo
+            magazineRepo.Add(new Magazine("M001", "Tech Monthly", 25));
 
-            book.Return();
-
-            Console.WriteLine($"Book Available after return: {book.IsAvailable}");
-
-            // Value Type demonstration
-            LibraryBranchInfo branch1 = new LibraryBranchInfo
+            Console.WriteLine("\n=== 2. List All Books ===");
+            foreach (var b in bookRepo.GetAll())
             {
-                BranchCode = "BR001",
-                Location = "Dhaka"
-            };
+                b.Describe();
+            }
 
-            LibraryBranchInfo branch2 = branch1;
-            branch2.Location = "Chittagong";
+            Console.WriteLine("\n=== 3. Unique Categories (HashSet Demo) ===");
+            foreach (var category in categories)
+            {
+                Console.WriteLine($"- Category: {category}");
+            }
 
-            Console.WriteLine("\nValue Type Demonstration:");
-            Console.WriteLine($"Original Branch Location: {branch1.Location}");
-            Console.WriteLine($"Copied Branch Location: {branch2.Location}");
+            Console.WriteLine("\n=== 4. Exception Handling Demo ===");
 
-            // Reference Type demonstration
-            Book originalBook = new Book("Clean Code", "Robert C. Martin");
+            // Test 1: DuplicateItemException
+            Console.WriteLine("\n[Testing Duplicate Item Addition]");
+            AddBookWithHandling(bookRepo, categories, new Book("B001", "Clean Code Copy", "Someone Else", "Programming"));
 
-            Book copiedBook = originalBook;
-            copiedBook.Author = "Changed Author";
+            // Test 2: ItemNotFoundException
+            Console.WriteLine("\n[Testing Item Search]");
+            FindBookWithHandling(bookRepo, "B999"); // Non-existing ID
 
-            Console.WriteLine("\nReference Type Demonstration:");
-            Console.WriteLine($"Original Book Author: {originalBook.Author}");
-            Console.WriteLine($"Copied Book Author: {copiedBook.Author}");
+            // Test 3: Successful search and Checkout
+            Console.WriteLine("\n[Testing Successful Search & Checkout]");
+            Book foundBook = FindBookWithHandling(bookRepo, "B001");
+            if (foundBook != null)
+            {
+                foundBook.CheckOut();
+                Console.WriteLine($"CheckOut Status: IsAvailable = {foundBook.IsAvailable}");
+            }
+        }
+
+        static void AddBookWithHandling(Repository<Book> repo, HashSet<string> categories, Book book)
+        {
+            try
+            {
+                repo.Add(book);
+                categories.Add(book.Category);
+                Console.WriteLine($"Successfully added: {book.Title}");
+            }
+            catch (DuplicateItemException ex)
+            {
+                Console.WriteLine($"Caught Custom Exception: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"General Error: {ex.Message}");
+            }
+            finally
+            {
+                Console.WriteLine("-> Operation attempted.");
+            }
+        }
+
+        static Book FindBookWithHandling(Repository<Book> repo, string id)
+        {
+            Book item = null;
+            try
+            {
+                item = repo.GetById(id);
+                Console.WriteLine($"Found item: {item.Title}");
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Console.WriteLine($"Caught Custom Exception: {ex.Message}");
+            }
+            finally
+            {
+                Console.WriteLine("-> Operation attempted.");
+            }
+            return item;
         }
     }
 }

@@ -1,16 +1,22 @@
-﻿namespace LibraryManagement
+﻿using System;
+
+namespace LibraryManagement
 {
     public class Book : LibraryItemBase
     {
         public string Author { get; set; }
-        public Book (string title, string author)
-            : base(title)
+        public string Category { get; set; }
+
+        public Book(string id, string title, string author, string category = "General")
+            : base(id, title)
         {
             Author = author;
+            Category = category;
         }
+
         public override void Describe()
         {
-            Console.WriteLine($"Book: {Title}, Author: {Author}");
+            Console.WriteLine($"Book [ID: {Id}]: {Title}, Author: {Author}, Category: {Category}");
         }
     }
 }

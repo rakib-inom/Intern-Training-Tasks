@@ -1,9 +1,12 @@
-﻿public interface ILibraryItem
+﻿namespace LibraryManagement
 {
-    string Title { get; }
-    bool IsAvailable { get; }
+    public interface ILibraryItem : IIdentifiable
+    {
+        string Title { get; }
+        bool IsAvailable { get; }
 
-    void CheckOut();
-    void Return();
-    void Describe();
+        void CheckOut();
+        void Return();
+        void Describe();
+    }
 }
