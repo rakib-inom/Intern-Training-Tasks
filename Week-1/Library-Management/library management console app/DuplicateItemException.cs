@@ -1,0 +1,10 @@
+﻿
+namespace LibraryManagementConsoleApp;
+
+public class DuplicateItemException : Exception
+{
+    public DuplicateItemException(string message)
+        : base(message)
+    {
+    }
+}
