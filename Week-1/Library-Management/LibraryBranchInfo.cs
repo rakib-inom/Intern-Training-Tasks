@@ -4,7 +4,7 @@ using System.Text;
 
 namespace library_management_console_app
 {
-    internal class Program
+    internal class LibraryBranchInfo
     {
     }
 }
