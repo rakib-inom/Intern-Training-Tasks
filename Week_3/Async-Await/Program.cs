@@ -55,6 +55,59 @@ namespace Async-Await{
                 Console.WriteLine($"[Error] Download failed: {ex.Message}");
             }
         }
+
+
+        Console.WriteLine("All downloads completed. Starting file processing...");
+
+        await Task.WhenAll(processingTasks);
+        Console.WriteLine("All file processing completed.");
+
+        stopwatch.Stop();
+
+        Console.WriteLine("\nFINAL RESULTS");
+
+        Console.WriteLine($"Successful files : {successfulFiles}");
+
+        Console.WriteLine($"Failed files : {failedFiles}");
+
+        Console.WriteLine(
+            $"Total time : " +
+            $"{stopwatch.Elapsed.TotalSeconds:F2} seconds"
+        );
+    }
+
+
+
+
+
+    static async Task<string> DownloadFileAsync(string fileName)
+    {
+        Stopwatch stopwatch = Stopwatch.StartNew();
+
+        Console.WriteLine($"[Download start] {fileName}");
+
+        int delay = random.Next(1000, 3001);
+        await Task.Delay(delay);
+
+
+        int chance = random.Next(1, 4);
+
+        if(chance == 1)
+        {
+            stopwatch.Stop();
+            throw new Exception($"{fileName} Download failed");
+        }
+
+        stopwatch.Stop();
+
+        Console.WriteLine(
+               $"[DOWNLOAD FINISHED] {fileName} " +
+               $"in {stopwatch.Elapsed.TotalSeconds:F2} seconds"
+           );
+
+        string contents = $"Contents of {fileName}";
+
+        return contents;
     }
 }
 }
