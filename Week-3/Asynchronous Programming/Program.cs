@@ -1,97 +1,91 @@
-﻿class Program
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
+
+class Program
 {
     
-    static Random rm = new Random();
-
     static async Task<string> DownloadFileAsync(string filename)
     {
-        Console.WriteLine($"download started: {filename} ");
-        
-        Stopwatch stp = new Stopwatch().StartNew();
+        Console.WriteLine($"downloading {filename}...");
+
+        Random rm = new Random();
         
         int time= rm.Next(1000, 30001);
         await Task.Delay(time);
 
-        if (rm.Next(1,4) == 1)
+        if (rm.Next(3) == 0)
         {
-            throw new Exception($"download failed: {filename} ");
+            throw new Exception($"download failed!");
         }
 
-        stp.Stop();
-        Console.WriteLine($"download finished: {filename} ({stp.ElapsedMiliseconds} ms)");
+        Console.WriteLine($"{filename} downloaded in {time/1000.0:F1}s)");
         
-        string message = $"this is the content of {filename}";
-        return message;
+        return $"contents of {filename}";
     }
 
     static async Task<int> ProcessFileAsync(string contents)
     {
-        Console.WriteLine($"Process started: {contents}");
-        
+        Console.WriteLine($"Processing file...");
+
+        Random rm = new Random();
         int time = rm.Next(1000, 30001);
         await Task.Delay(time);
 
         int result = contents.Length;
-        Console.WriteLine($"process finished: {Result} = {result");
+        Console.WriteLine($"processing finished. Result = {result}");
         
         return result;
     }
 
     static async Task Main()
     {
-            Stopwatch totalTime = Stopwatch.StartNew();
+        Stopwatch stp = Stopwatch.StartNew();
 
-            List<string> fileNames = new List<string>
+        string[] files = { "file1.txt", "file2.txt", "file3.txt" };
+
+        var downloads = new List<Task<string>>();
+        
+        foreach (var file in files)
+        {
+            downloads.Add(DownloadFileAsync(file));
+        }
+
+        var processingTasks = new List<Task<int>>();
+        
+        int success = 0;
+        int failed = 0;
+
+        while (downloads.Count > 0)
+        {
+            Task<string> finished = await Task.WhenAny(downloads);
+            downloads.Remove(finished);
+
+            try
             {
-                "file1.txt",
-                "file2.txt",
-                "file3.txt"
-            };
+                string contents = await finished;
+                success++;
 
-            int successCount = 0;
-            int failedCount = 0;
-
-            List<Task<int>> processTask = new List<Task<int>>();
-
-            List<Task<string>> downloadTask = new List<Task<string>>();
-
-            foreach(string file in fileNames)
-            {
-                downloadTask.Add(DownloadFileAsync(fileNames)) ;
+                processingTasks.Add(ProcessFileAsync(contents));
             }
 
-            while(downloadTask.Count > 0)
+            catch (Exception e)
             {
-                Task<string> finishedTask = await Task.WhenAny(downloadTask);
-                downloadTask.Remove(finishedTask);
-
-                try
-                {
-                    string contents = await finishedTask;
-                    successCount++;
-
-                    Task<int> processTask = ProcessFileAsync(contents);
-                    processTask.Add(processTask);
-                }
-
-                catch(Exception e)
-                {
-                    failedCount++;
-                    Console.WriteLine($"error: {e.Message}");
-                }
+                failed++;
+                Console.WriteLine($"error: {e.Message}");
             }
+        }
 
-            await processTask.WhenAll(processTask);
-            totalTime.Stop();
-            
-            Console.WriteLine();
+        await Task.WhenAll(processingTasks);
+        stp.Stop();
 
-            Console.WriteLine(" FINAL RESULT ");
+        Console.WriteLine("\nFINAL RESULT ");
 
-            Console.WriteLine($"files successed: {successCount}");
-            Console.WriteLine($"files failed: {failedCount}");
-            Console.WriteLine($"total time: {totalTime.TotalMilliseconds}ms");
-            Console.WriteLine();
-            Console.ReadLine();
+        Console.WriteLine($"succeeded: {success}");
+        Console.WriteLine($"failed: {failed}");
+        Console.WriteLine($"total time: {stp.Elapsed.TotalSeconds:F2} seconds");
+        Console.WriteLine();
+        Console.ReadLine();
     }
 }
