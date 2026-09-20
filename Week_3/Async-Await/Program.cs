@@ -25,6 +25,36 @@ namespace Async-Await{
             Task<string> task = DownloadFileAsync(file);
             downloadTasks.Add(task);
         }
+
+
+
+        List<Task<int>> processingTasks = new List<Task<int>>();
+
+        int successfulFiles = 0;
+        int failedFiles = 0;
+
+
+        while(downloadTasks.Count > 0)
+        {
+            Task<string> completedTask = await Task.WhenAny(downloadTasks);
+            downloadTasks.Remove(completedTask);
+
+
+            try
+            {
+                string contents = await completedTask;
+                successfulFiles++;
+                Console.WriteLine("[Success] Download completed");
+
+                Task<int> processingTask = ProcessFileAsync(contents);
+                processingTasks.Add(processingTask);
+            }
+            catch (Exception ex)
+            {
+                failedFiles++;
+                Console.WriteLine($"[Error] Download failed: {ex.Message}");
+            }
+        }
     }
 }
 }
