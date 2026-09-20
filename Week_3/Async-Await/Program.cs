@@ -109,5 +109,30 @@ namespace Async-Await{
 
         return contents;
     }
+
+
+
+    static async Task<int> ProcessFileAsync(string contents)
+    {
+        Stopwatch stopwatch = Stopwatch.StartNew();
+
+        Console.WriteLine(
+               "[PROCESS START]"
+           );
+
+        int delay = random.Next(1000, 3001);
+        await Task.Delay(delay);
+
+        int result = contents.Length;
+        stopwatch.Stop();
+
+        Console.WriteLine(
+             $"[PROCESS FINISHED] " +
+             $"Result = {result}, " +
+             $"Time = {stopwatch.Elapsed.TotalSeconds:F2} seconds"
+         );
+
+        return result;
+    }
 }
 }
