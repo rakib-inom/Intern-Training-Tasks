@@ -81,5 +81,17 @@
                 }
             }
 
+            await processTask.WhenAll(processTask);
+            totalTime.Stop();
+            
+            Console.WriteLine();
+
+            Console.WriteLine(" FINAL RESULT ");
+
+            Console.WriteLine($"files successed: {successCount}");
+            Console.WriteLine($"files failed: {failedCount}");
+            Console.WriteLine($"total time: {totalTime.TotalMilliseconds}ms");
+            Console.WriteLine();
+            Console.ReadLine();
     }
 }
