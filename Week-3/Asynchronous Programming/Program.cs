@@ -39,6 +39,47 @@
 
     static async Task Main()
     {
+            Stopwatch totalTime = Stopwatch.StartNew();
+
+            List<string> fileNames = new List<string>
+            {
+                "file1.txt",
+                "file2.txt",
+                "file3.txt"
+            };
+
+            int successCount = 0;
+            int failedCount = 0;
+
+            List<Task<int>> processTask = new List<Task<int>>();
+
+            List<Task<string>> downloadTask = new List<Task<string>>();
+
+            foreach(string file in fileNames)
+            {
+                downloadTask.Add(DownloadFileAsync(fileNames)) ;
+            }
+
+            while(downloadTask.Count > 0)
+            {
+                Task<string> finishedTask = await Task.WhenAny(downloadTask);
+                downloadTask.Remove(finishedTask);
+
+                try
+                {
+                    string contents = await finishedTask;
+                    successCount++;
+
+                    Task<int> processTask = ProcessFileAsync(contents);
+                    processTask.Add(processTask);
+                }
+
+                catch(Exception e)
+                {
+                    failedCount++;
+                    Console.WriteLine($"error: {e.Message}");
+                }
+            }
 
     }
 }
