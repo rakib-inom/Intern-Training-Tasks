@@ -4,8 +4,9 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 
 class Program
-{
-    
+{  
+    // download file
+
     static async Task<string> DownloadFileAsync(string filename)
     {
         Console.WriteLine($"downloading {filename}...");
@@ -25,6 +26,8 @@ class Program
         return $"contents of {filename}";
     }
 
+    // process file
+    
     static async Task<int> ProcessFileAsync(string contents)
     {
         Console.WriteLine($"Processing file...");
@@ -39,11 +42,13 @@ class Program
         return result;
     }
 
+    // main method
+    
     static async Task Main()
     {
         Stopwatch stp = Stopwatch.StartNew();
 
-        string[] files = { "file1.txt", "file2.txt", "file3.txt" };
+        string[] files = { "File1.txt", "File2.txt", "File3.txt" };
 
         var downloads = new List<Task<string>>();
         
@@ -80,8 +85,9 @@ class Program
         await Task.WhenAll(processingTasks);
         stp.Stop();
 
-        Console.WriteLine("\nFINAL RESULT ");
+        // final result
 
+        Console.WriteLine("\nFINAL RESULT ");
         Console.WriteLine($"succeeded: {success}");
         Console.WriteLine($"failed: {failed}");
         Console.WriteLine($"total time: {stp.Elapsed.TotalSeconds:F2} seconds");
