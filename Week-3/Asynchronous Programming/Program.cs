@@ -10,13 +10,11 @@ class Program
     static async Task<string> DownloadFileAsync(string filename)
     {
         Console.WriteLine($"downloading {filename}...");
-
-        Random rm = new Random();
         
-        int time= rm.Next(1000, 30001);
+        int time= Random.Shared.Next(1000, 3001);
         await Task.Delay(time);
 
-        if (rm.Next(3) == 0)
+        if (Random.Shared.Next(3) == 0)
         {
             throw new Exception($"download failed!");
         }
@@ -32,8 +30,7 @@ class Program
     {
         Console.WriteLine($"Processing file...");
 
-        Random rm = new Random();
-        int time = rm.Next(1000, 30001);
+        int time = Random.Shared.Next(1000, 3001);
         await Task.Delay(time);
 
         int result = contents.Length;
